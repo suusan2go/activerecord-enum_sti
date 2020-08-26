@@ -1,0 +1,7 @@
+source "https://rubygems.org"
+
+git "https://github.com/rails/rails.git", :branch => "master" do
+  gem "activerecord"
+end
+
+gemspec :path => "../"
