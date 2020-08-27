@@ -10,3 +10,6 @@ Gemfile.lock
 
 # rspec failure tracking
 .rspec_status
+vendor
+*.gemfile.lock
+gemfiles/.bundle
