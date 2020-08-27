@@ -29,6 +29,7 @@ jobs:
         run: |
           export BUNDLE_GEMFILE="${GITHUB_WORKSPACE}/gemfiles/${MTSR_RAILS_VERSION}.gemfile"
           bundle install --jobs 4 --retry 3
-          cat ${GITHUB_WORKSPACE}/gemfiles/${MTSR_RAILS_VERSION}.gemfile.lock
       - name: Test
-        run: bundle exec rake
+        run: |
+          bundle list
+          bundle exec rake
