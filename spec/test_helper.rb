@@ -1,5 +1,5 @@
 require 'active_record'
-require 'activerecord/enum_sti'
+require 'active_record/enum_sti'
 
 ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
 

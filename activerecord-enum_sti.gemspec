@@ -1,7 +1,7 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "activerecord/enum_sti/version"
+require "active_record/enum_sti/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "activerecord-enum_sti"

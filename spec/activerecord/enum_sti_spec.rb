@@ -1,8 +1,8 @@
 require "test_helper"
 
-RSpec.describe Activerecord::EnumSti do
+RSpec.describe ActiveRecord::EnumSti do
   it "has a version number" do
-    expect(Activerecord::EnumSti::VERSION).not_to be nil
+    expect(ActiveRecord::EnumSti::VERSION).not_to be nil
   end
 
   describe "sti with customized inheritance_column" do
@@ -19,6 +19,8 @@ RSpec.describe Activerecord::EnumSti do
       expect(@admin.my_role).to eq("admin")
       expect(@member.role).to eq("member")
       expect(@admin.role).to eq("admin")
+      expect(User.admin.last.class).to eq(User::Admin)
+      expect(User.member.last.class).to eq(User::Member)
     end
   end
 
@@ -37,6 +39,8 @@ RSpec.describe Activerecord::EnumSti do
       expect(@bank_transfer.my_type).to eq("bank_transfer")
       expect(@credit_card.type).to eq("credit_card")
       expect(@bank_transfer.type).to eq("bank_transfer")
+      expect(Payment.credit_card.last.class).to eq(Payment::CreditCard)
+      expect(Payment.bank_transfer.last.class).to eq(Payment::BankTransfer)
     end
   end
 end

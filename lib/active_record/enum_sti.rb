@@ -1,4 +1,4 @@
-require "activerecord/enum_sti/version"
+require "active_record/enum_sti/version"
 require "active_support/concern"
 require "active_support/core_ext/string/inflections"
 

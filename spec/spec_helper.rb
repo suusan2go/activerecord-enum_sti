@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "activerecord/enum_sti"
+require "active_record/enum_sti"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
