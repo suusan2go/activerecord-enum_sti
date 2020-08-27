@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 git "https://github.com/rails/rails.git", :branch => "master" do
   gem "activerecord"
+  gem "activesupport"
 end
 
 gemspec :path => "../"
