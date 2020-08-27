@@ -1,8 +1,63 @@
-# Activerecord::EnumSti
+# ActiveaRecord::EnumSti ![CI](https://github.com/suusan2go/activerecord-enum_sti/workflows/CI/badge.svg)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/activerecord/enum_sti`. To experiment with that code, run `bin/console` for an interactive prompt.
+ActiveRecord::EnumSti is a library to use enum values as STI type.
+When you use enum, you might see the code like following.
 
-TODO: Delete this and the text above, and describe your gem
+```ruby
+class Payment < ApplicationRecord
+  enum kind: { credit_card: 0, bank_transfer: 10, paypal: 20 }
+
+  def complete!
+    if credit_card?
+    # do something
+    elsif bank_transfer?
+    # do something
+    elsif paypal?
+    # do something
+    end
+  end
+
+  def cancel!
+    if credit_card?
+    # do something
+    elsif bank_transfer?
+    # do something
+    elsif paypal?
+    # do something
+    end
+  end
+end
+```
+
+In this code, we change the behavior according to the value of enum.
+But if we can change the class by the value of enum, this code will be more clear.
+
+This gem allows you to split the class using the Single Table Inheritance (STI) in Rails depending on the value of the enum.
+
+```ruby
+class Payment < ApplicationRecord
+  include ActiveRecord::EnumSti
+  enum type: { credit_card: 0, bank_transfer: 10, paypal: 20 }
+
+  def complete!
+    raise NotImplementedError
+  end
+
+  def cancel!
+    raise NotImplementedError
+  end
+end
+
+class Payment::CreditCard < Payment
+  def complete!
+    # do something for creditcard!
+  end
+
+  def cancel!
+    # do something for creditcard!
+  end
+end
+```
 
 ## Installation
 
@@ -21,8 +76,34 @@ Or install it yourself as:
     $ gem install activerecord-enum_sti
 
 ## Usage
+First of all, include `ActiveRecord::EnumSti` in your enum defined class.
 
-TODO: Write usage instructions here
+```ruby
+class Payment < ApplicationRecord
+  include ActiveRecord::EnumSti
+  enum type: { credit_card: 0, bank_transfer: 10, paypal: 20 }
+  # if you want to use the another column, you can use another enum column by below.
+  # self.inheritance_column = :your_enum_column
+end
+```
+
+Then, please define a class for each enum values. The class name should be `<SuperClass>::<camelized enum value>`
+
+```ruby
+class Payment::CreditCard < Payment
+end
+```
+
+Now, you can use the value of enum for STI like below!
+
+```
+@credit_card = Payment::CreditCard.create
+@credit_card.type
+=> "credit_card"
+Payment::CreditCard.all.to_sql
+=> "SELECT \"payments\".* FROM \"payments\" WHERE \"payments\".\"type\" = 0"
+```
+
 
 ## Development
 
