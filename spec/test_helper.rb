@@ -14,7 +14,11 @@ ActiveRecord::Schema.define do
   end
 end
 
-class User < ActiveRecord::Base
+class ApplicationRecord < ActiveRecord::Base
+  self.abstract_class = true
+end
+
+class User < ApplicationRecord
   self.inheritance_column = :role
   enum role: { member: 0 , admin: 20}
   include ActiveRecord::EnumSti
@@ -32,7 +36,7 @@ class User::Admin < User
   end
 end
 
-class Payment < ActiveRecord::Base
+class Payment < ApplicationRecord
   include ActiveRecord::EnumSti
   enum type: { credit_card: 0, bank_transfer: 10 }
 end
