@@ -1,6 +1,7 @@
 # ActiveaRecord::EnumSti ![CI](https://github.com/suusan2go/activerecord-enum_sti/workflows/CI/badge.svg)
 
-ActiveRecord::EnumSti is a library to use enum values as STI type.
+ActiveRecord::EnumSti is a library to use enum values as STI type.  
+
 When you use enum, you might see the code like following.
 
 ```ruby
