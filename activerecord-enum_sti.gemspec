@@ -5,7 +5,7 @@ require "active_record/enum_sti/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "activerecord-enum_sti"
-  spec.version       = Activerecord::EnumSti::VERSION
+  spec.version       = ActiveRecord::EnumSti::VERSION
   spec.authors       = ["suusan2go"]
   spec.email         = ["ksuzuki180@gmail.com"]
 
